@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\DashBoardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
-        Route::get('/', function () {
-        return view('admin.index');
-    });
-    Route::get('/login', function () {
-        return view('admin.register');
-    });
+Route::prefix('admin')->middleware('admin')->group(function () {
+       Route::get('/', [DashBoardController::class, 'index'])->name('admin.index');
+    // Route::get('/login', function () {
+    //     return view('admin.register');
+    // });
 });
