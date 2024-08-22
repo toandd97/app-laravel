@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashBoardController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +20,9 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->middleware('admin')->group(function () {
-       Route::get('/', [DashBoardController::class, 'index'])->name('admin.index');
-    // Route::get('/login', function () {
-    //     return view('admin.register');
-    // });
+    Route::get('/', [DashBoardController::class, 'index'])->name('admin.index');
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/add-category', [CategoryController::class, 'create'])->name('category.create');
+    Route::get('/login', [loginController::class, 'index'])->name('login.index');
+
 });

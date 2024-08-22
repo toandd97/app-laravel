@@ -69,9 +69,17 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.html" class="menu-link">
+              <a href="{{route('admin.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
+              </a>
+            </li>
+
+            <!-- Quan ly danh muc -->
+            <li class="menu-item">
+              <a href="{{route('category.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Category">Quản lý danh muc</div>
               </a>
             </li>
 
