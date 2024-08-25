@@ -21,8 +21,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.index');
-    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('/add-category', [CategoryController::class, 'create'])->name('category.create');
+    Route::resource('category', CategoryController::class);
     Route::get('/login', [loginController::class, 'index'])->name('login.index');
 
 });

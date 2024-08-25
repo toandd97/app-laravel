@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 class CategoryController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Category::all();
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -23,8 +26,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.category.add');
+    {   
+        $categories = Category::all();
+        return view('admin.category.add', compact('categories'));
     }
 
     /**
@@ -33,9 +37,16 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        try {
+            $data = $request->all();
+            Category::create($data);
+            return redirect()->route('category.index')->with('success', 'Thêm danh mục thành công');
+        } catch (\Exception $exception) {
+            // return redirect()->route('category.index')->with('error', 'Thêm danh mục thất bại');
+            return rediect()->back()->with('error', 'Thêm danh mục thất bại');
+        }
     }
 
     /**
@@ -55,9 +66,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        $categories = Category::all();
+        return view('admin.category.edit', compact('category', 'categories'));
     }
 
     /**
@@ -67,9 +79,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        try {
+            $category->update($request->all());
+            return redirect()->route('category.index')->with('success', 'Cập nhật danh mục thành công');
+        } catch (\Throwable $th) {
+            // return redirect()->route('category.index')->with('error', 'Thêm danh mục thất bại');
+            return rediect()->back()->with('error', 'Cập nhật danh mục thất bại');
+        }
     }
 
     /**
@@ -78,8 +96,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return redirect()->route('category.index')->with('success', 'Xóa danh mục thành công');
+        } catch (\Throwable $th) {
+            // return redirect()->route('category.index')->with('error', 'Thêm danh mục thất bại');
+            return rediect()->back()->with('error', 'Xóa danh mục thất bại');
+        }
     }
 }
