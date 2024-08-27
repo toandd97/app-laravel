@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +25,7 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.index');
     Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
     Route::get('/login', [loginController::class, 'index'])->name('login.index');
 
 });

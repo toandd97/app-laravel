@@ -202,6 +202,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    @yield('custom-js')
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src
