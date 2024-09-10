@@ -15,7 +15,6 @@
               @endif
              <div class="mb-3">
                 <a href="{{ route('category.create') }}" class="btn btn-primary">
-                  <i class="bx bx-plus me-1"></i> Thêm mới danh mục
                 </a>
               </div>
 
@@ -28,41 +27,27 @@
                       <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Menu cha</th>
-                        <th>Ngày tạo</th>
-                        <th>Trạng thái</th>
-                        <th>Tùy chọn</th>
+                        <th>giá</th>
+                        <th>Giá KM</th>
+                        <th>Tên danh  mục</th>
+                        <th>Anh</th>
+                        <th>ngày tạo</th>
+                        <th>tùy chọn</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse($categories as $key => $category)
+                        @forelse($products as $key => $item)
                         <tr>
                           <td>{{ $key + 1 }}</td>
-                          <td><strong>{{ $category->name }}</strong></td>
-                          <td>{{ $category->parent_id ? $category->parent_id : 'Không có' }}</td>
-                          <td>{{ $category->created_at->format('d/m/Y') }}</td>
+                          <td>{{$item->name}}</td>
+                          <td>{{$item->price}}</td>
+                          <td>{{$item->sale_price}}</td>
+                          <td>{{$item->category->name}}</td>
                           <td>
-                            @if($category->status == 1)
-                              <span class="badge bg-success">Hoạt động</span>
-                            @else
-                              <span class="badge bg-danger">Không hoạt động</span>
-                            @endif
+                            <img src="{{asset('storage/images')}}/{{$item->image}}" alt="" width="150px">
                           </td>
-                          <td>
-                            <div class="btn-group">
-                              <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="bx bx-edit-alt me-1"></i> Sửa
-                              </a>
-                              <form action="{{ route('category.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                  <i class="bx bx-trash me-1"></i> Xóa
-                                </button>
-                              </form>
-                            </div>
-                          </td>
-                        </tr>
+                          <td>{{$item->created_at}}</td>
+
                         @empty
                             <span>Chưa có tiêu dề</span>
                         @endforelse

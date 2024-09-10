@@ -92,6 +92,11 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
+                  <a href="{{route('product.index')}}" class="menu-link">
+                    <div data-i18n="Without menu">Danh sach sản phẩm</div>
+                  </a>
+                </li>
+                <li class="menu-item">
                   <a href="{{route('product.create')}}" class="menu-link">
                     <div data-i18n="Without menu">Thêm mới sản phẩm</div>
                   </a>

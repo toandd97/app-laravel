@@ -12,7 +12,7 @@
                     <div class="card mb-4">
                         <h5 class="card-header">Thêm mới sản phẩm</h5>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('product.store') }}"  endtype="multipart/form-data">
+                            <form method="POST" action="{{ route('product.store') }}"  enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
